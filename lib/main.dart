@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ecommerce_cart/model/items_controller.dart';
+import 'package:ecommerce_cart/model/theme_controller.dart';
 import 'package:ecommerce_cart/pages/about_page.dart';
 import 'package:ecommerce_cart/pages/cart_page.dart';
 import 'package:ecommerce_cart/pages/intro_page.dart';
@@ -11,11 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => ItemController(), child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ItemController()),
+        ChangeNotifierProvider(
+            create: (context) => ThemeController()), // Added ThemeController
+      ],
+      child: MyApp(),
+    ),
+  );
 }
-
-class ItemsController {}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: IntroPage(),
-      theme: lightMode,
+      theme: Provider.of<ThemeController>(context).theme,
       routes: {
         "intro_page": (context) => IntroPage(),
         "shop_page": (context) => ShopPage(),

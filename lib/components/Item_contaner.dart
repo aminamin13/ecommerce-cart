@@ -1,9 +1,40 @@
 import 'package:ecommerce_cart/model/items.dart';
+import 'package:ecommerce_cart/model/items_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({super.key, required this.item});
   final Items item;
+
+  void addToCart(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Add this item to your cart?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+
+              context.read<ItemController>().addItem(item);
+            },
+            child: Text(
+              "Yes",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("No", style: TextStyle(color: Colors.black)),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +81,11 @@ class ItemContainer extends StatelessWidget {
                 '\$${item.price.toString()}',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.add))
+              IconButton(
+                  onPressed: () {
+                    addToCart(context);
+                  },
+                  icon: Icon(Icons.add))
             ],
           ),
         ],

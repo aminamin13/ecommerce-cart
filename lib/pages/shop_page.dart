@@ -19,7 +19,17 @@ class _ShopPageState extends State<ShopPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        actions: [Icon(Icons.shopping_cart_checkout_outlined)],
+        actions: [
+          Text(
+            context.read<ItemController>().userItem.length.toString(),
+            style: TextStyle(fontSize: 15),
+          ),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "cart_page");
+              },
+              icon: Icon(Icons.shopping_cart_checkout_outlined)),
+        ],
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
       drawer: MyDrawer(),
@@ -36,7 +46,6 @@ class _ShopPageState extends State<ShopPage> {
                 style: TextStyle(fontSize: 15)),
             SizedBox(
               height: 500,
-              
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: itemcontroller.length,
