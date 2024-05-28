@@ -11,7 +11,7 @@ class ItemContainer extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: Text("Add this item to your cart?"),
+        content: Text("Add ${item.name} item to your cart?"),
         actions: [
           TextButton(
             onPressed: () {

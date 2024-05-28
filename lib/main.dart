@@ -7,7 +7,6 @@ import 'package:ecommerce_cart/pages/cart_page.dart';
 import 'package:ecommerce_cart/pages/intro_page.dart';
 import 'package:ecommerce_cart/pages/setting_page.dart';
 import 'package:ecommerce_cart/pages/shop_page.dart';
-import 'package:ecommerce_cart/themes/light_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
